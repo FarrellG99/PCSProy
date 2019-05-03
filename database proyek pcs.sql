@@ -183,3 +183,51 @@ INSERT INTO JURUSAN VALUES('14','S1-Desain Produk','AD001');
 INSERT INTO JURUSAN VALUES('01','D3-Manajemen Informatika','YK001');
 INSERT INTO JURUSAN VALUES('31','Prog.Prof.S1-Teknik Informatika','EI001');
 INSERT INTO JURUSAN VALUES('21','S2-Teknologi Informasi','AT001');
+
+create or replace function autogennip
+(inputnama in varchar2)
+return varchar2
+is
+	namadepan varchar2(1);
+	namabelakang varchar2(1);
+	gabung varchar2(2);
+	angka number(3);
+	hasil varchar2(5);
+begin
+	if instr(inputnama,' ',1) = 0 then
+		namadepan := initcap(substr(inputnama,1,1));
+		namabelakang := initcap(substr(inputnama,2,1));
+	elsif instr(inputnama,' ',-1,1) > 0 then
+		namadepan := initcap(substr(inputnama,1,1));
+		namabelakang := initcap(substr(inputnama,instr(inputnama, ' ',-1,1)+1,1));
+	elsif instr(inputnama,' ',1) > 0 then
+		namadepan := initcap(substr(inputnama,1,1));
+		namabelakang := initcap(substr(inputnama,instr(inputnama, ' ',1)+1,1));
+	end if;
+	gabung := namadepan || namabelakang;
+	select to_number(max(substr(nip,3,3))) into angka from dosen where substr(nip,1,2) = gabung;
+	if angka is NULL then
+		hasil := gabung || lpad(1,3,'0');
+	else
+		if angka > 0 then
+			hasil := gabung || lpad(angka+1,3,'0');
+		else
+			hasil := gabung || lpad(angka,3,'0');
+		end if;
+	end if;
+	return hasil;
+end;
+/
+show err;
+select autogennip('Farrell Gunawan') from dual;
+
+set serveroutput on;
+create or replace procedure p1
+is
+begin
+	dbms_output.put_line('========================');
+	dbms_output.put_line('');
+end;
+/
+show err;
+execute p1;
