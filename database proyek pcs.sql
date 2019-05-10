@@ -36,6 +36,7 @@ CREATE TABLE MAHASISWA (
 	AGAMA_MAHASISWA  VARCHAR2(15) CONSTRAINT CH_AGM_MHS NOT NULL,
 	TEMPATLAHIR_MHS  VARCHAR2(30) CONSTRAINT NN_TMP_LHR_MHS NOT NULL,
 	TGLLAHIR_MHS	 DATE NOT NULL,
+	JENIS_KELAMIN	 VARCHAR2(1)  CONSTRAINT CHECK_JENIS_KELAMIN CHECK(JENIS_KELAMIN = 'L' OR JENIS_KELAMIN = 'P'),
 	ALAMAT_MHS	     VARCHAR2(50) CONSTRAINT NN_ALAMAT_MHS NOT NULL,
 	NOTELP_MHS	     VARCHAR2(15) CONSTRAINT NN_NOTELP_MHS NOT NULL,
 	NAMAORTU_MHS	 VARCHAR2(50) CONSTRAINT NN_NMORTU NOT NULL,
@@ -172,20 +173,20 @@ INSERT INTO DOSEN VALUES('YJ001','Yohanes Joko H., Drs., M.S.', 'P','KRISTEN','S
 INSERT INTO DOSEN VALUES('YK001','Yosi Kristian, S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Nginden II No.88', '0', '(918) 883-8701');
 INSERT INTO DOSEN VALUES('YW001','Yulius Widi Nugroho, S.Sn. ,M.Si.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Nginden 2 No.99', '0','(384) 771-7662');
 
-INSERT INTO MAHASISWA VALUES('217011670','EI001','Daud Kurnia Tanamas','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217011671','EI001','Dimas Bagus Nugroho Verdy Anwar','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217011672','EI001','Hafizh Ainanto Pratama','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217011673','EI001','Laurentius Dirga Cahya Putra','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217011674','EI001','Reyhan Rahma Sugiarto','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217011675','EI001','Rifqy Alfiansyah','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217102588','HS001','Andreas Wijaya','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217102589','HS001','Christine Calista','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217102590','HS001','Dafi Gumawang Priadi','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217102591','HS001','Jeffry Sandy Purnomo','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217102592','SA002','Rio Ardandi','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217102593','SA002','Rohman Is Wahyudi','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217102594','SA002','Teguh Santoso','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
-INSERT INTO MAHASISWA VALUES('217102595','SA002','Tonny Salim Suswanto','kristen','surabaya',sysdate,'surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217011670','EI001','Daud Kurnia Tanamas','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217011671','EI001','Dimas Bagus Nugroho Verdy Anwar','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217011672','EI001','Hafizh Ainanto Pratama','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217011673','EI001','Laurentius Dirga Cahya Putra','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217011674','EI001','Reyhan Rahma Sugiarto','kristen','surabaya',sysdate,'P','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217011675','EI001','Rifqy Alfiansyah','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217102588','HS001','Andreas Wijaya','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217102589','HS001','Christine Calista','kristen','surabaya',sysdate'P','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217102590','HS001','Dafi Gumawang Priadi','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217102591','HS001','Jeffry Sandy Purnomo','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217102592','SA002','Rio Ardandi','kristen','surabaya',sysdate,'L','L','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217102593','SA002','Rohman Is Wahyudi','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217102594','SA002','Teguh Santoso','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
+INSERT INTO MAHASISWA VALUES('217102595','SA002','Tonny Salim Suswanto','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
 
 INSERT INTO JURUSAN VALUES('11','S1-Teknik Informatika','YK001');
 INSERT INTO JURUSAN VALUES('17','S1-Desain Komunikasi Visual','LZ001');
