@@ -38,6 +38,7 @@ namespace Project_PCS
             da.Fill(dsTab);
             dataGridView1.DataSource = dsTab.Tables[0];
             //dataGridView1.Sort(this.dataGridView1.Columns[]);
+            conn.Close();
         }
 
         private void Form3_Load(object sender, EventArgs e)
@@ -59,7 +60,7 @@ namespace Project_PCS
             {
                 radioButton2.Checked = true;
             }
-            comboBox1.SelectedValue = dataGridView1.Rows[index].Cells[3].Value.ToString();
+            comboBox1.SelectedItem = dataGridView1.Rows[index].Cells[3].Value.ToString();
             textBox3.Text = dataGridView1.Rows[index].Cells[4].Value.ToString();
             textBox4.Text = dataGridView1.Rows[index].Cells[6].Value.ToString();
             string[] pecah = dataGridView1.Rows[index].Cells[5].Value.ToString().Split(' ');
@@ -92,7 +93,7 @@ namespace Project_PCS
                 if (radioButton3.Checked == true) { wali = '0'; }
                 else { wali = '1'; }
                 string[] pecah = dataGridView1.Rows[index].Cells[5].Value.ToString().Split(' ');
-                cmd.CommandText = "INSERT INTO DOSEN VALUES('" + textBox1.Text + "' , '" + textBox2.Text + "' , '" + jk + "','" + comboBox1.SelectedValue + "','" + textBox3.Text + "',to_date('" + pecah[0] + "','dd-mm-yyyy'),'" + textBox4.Text + "','" + wali + "','" + textBox5.Text + "')";
+                cmd.CommandText = "INSERT INTO DOSEN VALUES('" + textBox1.Text + "' , '" + textBox2.Text + "' , '" + jk + "','" + comboBox1.SelectedItem.ToString() + "','" + textBox3.Text + "',to_date('" + pecah[0] + "','dd-mm-yyyy'),'" + textBox4.Text + "','" + wali + "','" + textBox5.Text + "')";
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 refresh();
@@ -154,7 +155,6 @@ namespace Project_PCS
                     throw;
                 }
             }
-            
         }
     }
 }
