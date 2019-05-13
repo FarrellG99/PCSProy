@@ -119,7 +119,7 @@ namespace Project_PCS
                 if (radioButton3.Checked == true){wali = '0';}
                 else{wali = '1';}
                 string[] pecah = dataGridView1.Rows[index].Cells[5].Value.ToString().Split(' ');
-                cmd.CommandText = "UPDATE dosen SET NIP ='" + textBox1.Text + "',nama_dosen ='" + textBox2.Text + "', jkdosen ='" + jk + "',agama_dosen ='" + comboBox1.SelectedValue.ToString() + "',tempatlhr_dosen ='" + textBox3.Text + "',tanggal_dosen = to_date('" + pecah[0] + "','DD/MM/YYYY'),alamat_dosen = '" + textBox4.Text + "',status_wali = '" + wali + "',notelp_dosen = '" + textBox5.Text + "'where nip = '" + textBox1.Text + "'";
+                cmd.CommandText = "UPDATE dosen SET NIP ='" + textBox1.Text + "',nama_dosen ='" + textBox2.Text + "', jkdosen ='" + jk + "',agama_dosen ='" + comboBox1.SelectedItem.ToString() + "',tempatlhr_dosen ='" + textBox3.Text + "',tanggal_dosen = to_date('" + pecah[0] + "','DD/MM/YYYY'),alamat_dosen = '" + textBox4.Text + "',status_wali = '" + wali + "',notelp_dosen = '" + textBox5.Text + "'where nip = '" + textBox1.Text + "'";
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 refresh();

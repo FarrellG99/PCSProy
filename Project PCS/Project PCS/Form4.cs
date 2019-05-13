@@ -122,5 +122,28 @@ namespace Project_PCS
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.Connection = conn;
+                //delete dan update tinggal ubah CommandText
+                char jk;
+                if (radioButton1.Checked == true) { jk = 'L'; }
+                else { jk = 'P'; }
+                string[] pecah = dataGridView1.Rows[index].Cells[5].Value.ToString().Split(' ');
+                cmd.CommandText = "UPDATE mahasiswa SET nrp = '" + textBox1.Text + "',nip = '" + textBox2.Text + "',nama_mahasiswa = '" + textBox6.Text + "', agama_mahasiswa = '" + comboBox1.SelectedItem.ToString() + "', tempatlahir_mhs = '" + textBox3.Text + "', tgllahir_mhs = to_date('" + pecah[0] + "','dd/mm/yyyy'), jenis_kelamin = '" + jk + "', alamat_mhs = '" + textBox4.Text + "', notelp_mhs = '" + textBox5.Text + "', namaortu_mhs = '" + textBox7.Text + "', notelportu_mhs = '" + textBox8.Text + "' where nrp = '"+textBox1.Text+"'";
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
