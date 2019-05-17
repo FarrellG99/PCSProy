@@ -26,8 +26,14 @@ CREATE TABLE DOSEN (
 	TEMPATLHR_DOSEN   VARCHAR2(30) CONSTRAINT NN_TMPLHR_DOSEN NOT NULL,
 	TANGGAL_DOSEN     DATE NOT NULL,
 	ALAMAT_DOSEN      VARCHAR2(50) CONSTRAINT NN_ALAMAT_DSN  NOT NULL,
-	STATUS_WALI       VARCHAR2(1)  CONSTRAINT CH_STATUS_WALI CHECK(STATUS_WALI = 0 OR STATUS_WALI = 0),
+	STATUS_WALI       VARCHAR2(1)  CONSTRAINT CH_STATUS_WALI CHECK(STATUS_WALI = 0 OR STATUS_WALI = 1),
 	NOTELP_DOSEN      VARCHAR2(15) NOT NULL 
+);
+
+CREATE TABLE JURUSAN (
+	KODE_JURUSAN    VARCHAR2(3) PRIMARY KEY,
+	NAMA_JURUSAN    VARCHAR2(35) CONSTRAINT NN_NM_NMJUR NOT NULL,
+	NIP	            VARCHAR2(9)  CONSTRAINT FK0_JUR REFERENCES DOSEN(NIP)
 );
 
 CREATE TABLE MAHASISWA (
@@ -43,12 +49,6 @@ CREATE TABLE MAHASISWA (
 	NOTELP_MHS	     VARCHAR2(15) CONSTRAINT NN_NOTELP_MHS NOT NULL,
 	NAMAORTU_MHS	 VARCHAR2(50) CONSTRAINT NN_NMORTU NOT NULL,
 	NOTELPORTU_MHS	 VARCHAR2(15) CONSTRAINT NN_TELP_ORTU NOT NULL
-);
-
-CREATE TABLE JURUSAN (
-	KODE_JURUSAN    VARCHAR2(3) PRIMARY KEY,
-	NAMA_JURUSAN    VARCHAR2(35) CONSTRAINT NN_NM_NMJUR NOT NULL,
-	NIP	            VARCHAR2(9)  CONSTRAINT FK0_JUR REFERENCES DOSEN(NIP)
 );
 
 CREATE TABLE PERIODE (
@@ -195,87 +195,87 @@ INSERT INTO PENGGUNA VALUES('YM001','123','DOSEN');
 INSERT INTO PENGGUNA VALUES('YW001','123','DOSEN');
 INSERT INTO PENGGUNA VALUES('admin','admin','admin');
 
-INSERT INTO DOSEN VALUES('AD001','Agatha Dinarah Sri Rumestri, S.T.','P','KRISTEN','SURABAYA',SYSDATE,'Jalan Purwodadi 1 No.180','0', '(807) 948-6503');
-INSERT INTO DOSEN VALUES('AG001','Agus Gunawan, Ir., MSEE.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Menur No.109', '0', '(554) 492-8462');
-INSERT INTO DOSEN VALUES('AD002','Alan David Prayogi, S.T.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Pandugo No.133', '0','(911) 173-7286');
-INSERT INTO DOSEN VALUES('DA001','David Alexandre, S.Kom., MBA', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Kali Rungkut No.35', '0','(550) 985-4889');
-INSERT INTO DOSEN VALUES('AA001','Amelia Agustina, S.Ds.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Nginden 4C No.92', '0','(491) 740-5799');
-INSERT INTO DOSEN VALUES('AA002','Amelia Alexandra, S.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Lontar Candi Lempung No.165', '0','(813) 354-9015');
-INSERT INTO DOSEN VALUES('AS001','Andri Suhartono, S.T.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Rungkut Asri Utara XX No.98', '0','(854) 777-6830');
-INSERT INTO DOSEN VALUES('AT001','Arya Tandy Hermawan, Ir., M.T.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Pregolan Bunder No.79', '0','(978) 662-6163');
-INSERT INTO DOSEN VALUES('AA003','Audrey Ayu Dianaris, S.SI.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Pucang Kerep No.38', '0','(972) 511-7089');
-INSERT INTO DOSEN VALUES('BB001','Bonifacia Bulan Arumingtyas, S.Ds.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Gunung Anyar Tambak No.177', '0', '(806) 692-1898');
-INSERT INTO DOSEN VALUES('BS001','Budhy Sutanto, Ir.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Raya Darmo No.179', '0', '(601) 437-6256');
-INSERT INTO DOSEN VALUES('CA001','Christian Aditya, S.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Ngagel Madya 5 No.47', '0', '(215) 664-0788');
-INSERT INTO DOSEN VALUES('DA002','Decky Avrilukito, S.Sn., M.M.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Kali Rungkut 5 No.194', '0', '(839) 116-5238');
-INSERT INTO DOSEN VALUES('DC001','Detyo Campoko, S.T.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Raya Jemur Andayani No.164', '0', '(387) 150-2839');
-INSERT INTO DOSEN VALUES('DD001','Devi Dwi Purwanto, S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Raya Darmo No.228', '0', '(338) 565-2101');
-INSERT INTO DOSEN VALUES('ER001','Eka Rahayu Setyaningsih, S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Nginden 5 No.30', '0','(387) 886-0227');
-INSERT INTO DOSEN VALUES('ES001','Endang Setyati, Dr., Ir., Hj.,, M.T.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Panglima Sudirman No.44', '0','(440) 259-6334');
-INSERT INTO DOSEN VALUES('EP001','Edwin Pramana, Ir., M.AppSc.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Rajawali No.115', '0', '(789) 781-2429');
-INSERT INTO DOSEN VALUES('EP002','Erick Pranata, S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Nyamplungan No.127', '0', '(900) 722-3063');
-INSERT INTO DOSEN VALUES('ES002','Eric Sugiharto, S.SI.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Pahlawan No.70', '0','(543) 188-1693');
-INSERT INTO DOSEN VALUES('EI001','Esther Irawati Setiawan, S.Kom, M.Kom', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Nias No.111', '0', '(970) 770-6610');
-INSERT INTO DOSEN VALUES('FX001','F.X. Ferdinandus, Ir., M.T.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Nginden 1 No.184', '0','(715) 409-4037');
-INSERT INTO DOSEN VALUES('FH001','Francisca Haryanti Chandra, Dr., Ir., M.T.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Gubeng No.91', '0', '(163) 337-4634');
-INSERT INTO DOSEN VALUES('GL001','Grace Levina Dewi, S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Raya Medokan Ayu. No.242', '0','(495) 516-3297');
-INSERT INTO DOSEN VALUES('GU001','Gunawan, Ir., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Pasar Turi No.7', '0', '(461) 772-6192');
-INSERT INTO DOSEN VALUES('HS001','Hari Sutiksno, Dr., Ir., M.T.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Nyamplungan 240 No.253', '0', '(306) 386-2385');
-INSERT INTO DOSEN VALUES('HJ001','Hartarto Junaedi, S.Kom. ,M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Raya Prapen No.236', '0','(168) 512-1638');
-INSERT INTO DOSEN VALUES('HA001','Hendrawan Armanto, S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Nginden Intan Timur 1 No.72', '0', '(749) 688-1844');
-INSERT INTO DOSEN VALUES('HB001','Herman Budianto, Ir., M.M.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Jemur Handayani 50 No.124', '0', '(375) 452-8845');
-INSERT INTO DOSEN VALUES('IC001','Iwan Chandra, S.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Nginden Semolo No.59', '0', '(241) 989-7062');
-INSERT INTO DOSEN VALUES('IG001','Imelda Gozali, B.Eng., M.Pd.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Manyar No.171', '0','(989) 895-5803');
-INSERT INTO DOSEN VALUES('IL001','Indra Lesmana, S.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Ngagel No.243', '0', '(639) 449-9313');
-INSERT INTO DOSEN VALUES('IE001','Ivan Eliata Kusuma, S.T., M.T.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Raya Rungkut Madya No.88', '0', '(685) 567-0093');
-INSERT INTO DOSEN VALUES('JC001','Jacky Cahyadi, S.Sn.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Jemursari No.158', '0','(414) 293-4960');
-INSERT INTO DOSEN VALUES('JP001','Jaya Pranata, S.Kom., M.T.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Pasar Kembang 4-6 No.201', '0','(244) 654-6725');
-INSERT INTO DOSEN VALUES('JN001','Dr. Jenny Ngo, MSc.Ed.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Rungkut Asri Barat IX No.224', '0','(852) 933-8611');
-INSERT INTO DOSEN VALUES('JS001','Joan Santoso, S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Kendangsari No.127', '0', '(204) 949-4525');
-INSERT INTO DOSEN VALUES('JH001','Jonie Hermanto, S.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Pucang Sewu VII No.139', '0','(648) 520-7444');
-INSERT INTO DOSEN VALUES('JP002','Judi Prajetno Sugiono, Ir., M.M.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Ratna No.15', '0', '(441) 275-1723');
-INSERT INTO DOSEN VALUES('KE001','Kelvin, S.T., M.M.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Raya ITS, Surabaya No.125', '0','(360) 874-2185');
-INSERT INTO DOSEN VALUES('KS001','Kevin Setiono, S.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Pemuda 33-35 No.118', '0','(448) 666-0337');
-INSERT INTO DOSEN VALUES('KG001','Khinardi Gunawan, Ir.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Jambangan No.19', '0','(451) 233-4528');
-INSERT INTO DOSEN VALUES('KI001','Kristian Indradiarta G., S.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE, 'jalan pajajaran No.200', '0','(393) 181-2709');
-INSERT INTO DOSEN VALUES('LZ001','Lukman Zaman P. C. S. W., S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Penjernihan No.129', '0','(315) 672-8258');
-INSERT INTO DOSEN VALUES('IY001','Is Yuniarto Nafawi, S.Sn.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Ronggolawe No.13', '0','(423) 126-1901');
-INSERT INTO DOSEN VALUES('MB001','Martinus Brahma Dwi Laksana, S.T.', 'P','KRISTEN','SURABAYA',SYSDATE,'jalan raya jemur andayani No.4', '0', '(137) 910-9149');
-INSERT INTO DOSEN VALUES('IM001','Indra Maryati, S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Jemursari No.247', '0', '(693) 786-9557');
-INSERT INTO DOSEN VALUES('MS001','Mikhael setiawan, S.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Rangkah gg 7 no 26-B No.173', '0', '(827) 883-1604');
-INSERT INTO DOSEN VALUES('OB001','Oswald Baskoro Satyoadi, Ir., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Pengampon VI No.28', '0','(818) 120-3834');
-INSERT INTO DOSEN VALUES('CP001','C. Pickerling S.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Rungkut Asri Tengah VIII No.24', '0', '(720) 119-2929');
-INSERT INTO DOSEN VALUES('PE001','Pram Eliyah Yuliana, S.T., M.T.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Pucang Anom Timur No.161', '0','(400) 162-3791');
-INSERT INTO DOSEN VALUES('SR001','Sri Rahayu, S.T., M.T.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Raya Rungkut Madya Kav 8-10 No.227', '0', '(647) 961-7160');
-INSERT INTO DOSEN VALUES('RA001','Reddy Alexandro Harianto, S.Kom., M. Kom', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Raya Ngagel No.158', '0', '(245) 571-3018');
-INSERT INTO DOSEN VALUES('RL001','Riandika Lumaris, S. Kom., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'jalan ngagel jaya utara No.250', '0','(785) 218-4740');
-INSERT INTO DOSEN VALUES('SA001','Sandy Ardianto, S.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Pesapen Selatan No.251', '0','(390) 718-1365');
-INSERT INTO DOSEN VALUES('SA002','Setya Ardhi, S.T., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Pesapen Kali No.230', '0', '(796) 949-0679');
-INSERT INTO DOSEN VALUES('SU001','Sufiana, Dra., M.Sn.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Raya Jemur Sari No.82', '0', '(469) 402-9819');
-INSERT INTO DOSEN VALUES('ST001','S. Tigor B. Tambunan, S.T., M.M.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Nginden Intan Barat No.199', '0','(228) 394-7066');
-INSERT INTO DOSEN VALUES('ST002','Suhatati Tjandra, Ir., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Pasar Turi 1 No.221', '0','(831) 323-4845');
-INSERT INTO DOSEN VALUES('HT001','Herman Thuan To Saurik, S.Kom., M.T.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Raya Prapen No.202', '0','(282) 959-2064');
-INSERT INTO DOSEN VALUES('TP001','Tjwanda Putera Gunawan, Ir., M.Pd.', 'P','KRISTEN','SURABAYA',SYSDATE, 'jalan pogot No.44', '0','(562) 987-4956');
-INSERT INTO DOSEN VALUES('MD001','Masrara Dwi Yanti Handayani, S.Pd.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Panglima Sudirman No.210', '0', '(993) 585-4544');
-INSERT INTO DOSEN VALUES('YM001','Yuliana Melita Pranoto, S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Raya Lontar No.237', '0', '(780) 149-0147');
-INSERT INTO DOSEN VALUES('YJ001','Yohanes Joko H., Drs., M.S.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Raya Lontar No.66', '0','(135) 954-0485');
-INSERT INTO DOSEN VALUES('YK001','Yosi Kristian, S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',SYSDATE,'Jalan Nginden II No.88', '0', '(918) 883-8701');
-INSERT INTO DOSEN VALUES('YW001','Yulius Widi Nugroho, S.Sn. ,M.Si.', 'P','KRISTEN','SURABAYA',SYSDATE, 'Jalan Nginden 2 No.99', '0','(384) 771-7662');
+INSERT INTO DOSEN VALUES('AD001','Agatha Dinarah Sri Rumestri, S.T.','P','KRISTEN','PURBALINGGA',to_date('21/08/1970','dd/mm/yyyy'),'Jalan Purwodadi 1 No.180','0', '081221645484');
+INSERT INTO DOSEN VALUES('AG001','Agus Gunawan, Ir., MSEE.', 'L','KATHOLIK','SURABAYA',to_date('11/10/1974','dd/mm/yyyy'), 'Jalan Raya Menur No.109', '1', '081145456252');
+INSERT INTO DOSEN VALUES('AD002','Alan David Prayogi, S.T.', 'L','BUDHA','MALANG',to_date('11/10/1975','dd/mm/yyyy'), 'Jalan Pandugo No.133', '1','081111545654');
+INSERT INTO DOSEN VALUES('DA001','David Alexandre, S.Kom., MBA', 'L','KRISTEN','SURABAYA',to_date('23/06/1976','dd/mm/yyyy'), 'Jalan Raya Kali Rungkut No.35', '1','081665789987');
+INSERT INTO DOSEN VALUES('AA001','Amelia Agustina, S.Ds.', 'P','KRISTEN','SURABAYA',to_date('27/08/1976','dd/mm/yyyy'), 'Jalan Nginden 4C No.92', '0','082262556563');
+INSERT INTO DOSEN VALUES('AA002','Amelia Alexandra, S.Kom.', 'P','KATHOLIK','SURABAYA',to_date('18/06/1977','dd/mm/yyyy'), 'Jalan Raya Lontar Candi Lempung No.165', '1','081132223255');
+INSERT INTO DOSEN VALUES('AS001','Andri Suhartono, S.T.', 'L','ISLAM','SURABAYA',to_date('21/05/1979','dd/mm/yyyy'), 'Jalan Rungkut Asri Utara XX No.98', '0','08125648795');
+INSERT INTO DOSEN VALUES('AT001','Arya Tandy Hermawan, Ir., M.T.', 'L','KATHOLIK','SURABAYA',to_date('05/12/1980','dd/mm/yyyy'), 'Jalan Pregolan Bunder No.79', '0','081789887542');
+INSERT INTO DOSEN VALUES('AA003','Audrey Ayu Dianaris, S.SI.', 'P','KRISTEN','SURABAYA',to_date('15/02/1981','dd/mm/yyyy'),'Jalan Pucang Kerep No.38', '0','081323665995');
+INSERT INTO DOSEN VALUES('BB001','Bonifacia Bulan Arumingtyas, S.Ds.', 'P','KRISTEN','BANYUWANGI',to_date('20/12/1981','dd/mm/yyyy'), 'Jalan Raya Gunung Anyar Tambak No.177', '1', '0822336225489556');
+INSERT INTO DOSEN VALUES('BS001','Budhy Sutanto, Ir.', 'L','KRISTEN','SURABAYA',to_date('04/02/1982','dd/mm/yyyy'),'Jalan Raya Darmo No.179', '0', '082247748495');
+INSERT INTO DOSEN VALUES('CA001','Christian Aditya, S.Kom.', 'L','KRISTEN','SURABAYA',to_date('08/11/1982','dd/mm/yyyy'),'Jalan Ngagel Madya 5 No.47', '0', '082265497877');
+INSERT INTO DOSEN VALUES('DA002','Decky Avrilukito, S.Sn., M.M.', 'L','KATHOLIK','SURABAYA',to_date('08/11/1982','dd/mm/yyyy'), 'Jalan Raya Kali Rungkut 5 No.194', '0', '089254652331');
+INSERT INTO DOSEN VALUES('DC001','Detyo Campoko, S.T.', 'L','ISLAM','JOGJAKARTA',to_date('08/11/1982','dd/mm/yyyy'),'Jalan Raya Jemur Andayani No.164', '0', '082211546698');
+INSERT INTO DOSEN VALUES('DD001','Devi Dwi Purwanto, S.Kom., M.Kom.', 'P','KATHOLIK','SURABAYA',to_date('08/11/1982','dd/mm/yyyy'),'Jalan Raya Darmo No.228', '1', '081236559784');
+INSERT INTO DOSEN VALUES('ER001','Eka Rahayu Setyaningsih, S.Kom., M.Kom.', 'P','KATHOLIK','SURABAYA',to_date('10/11/1995','dd/mm/yyyy'),'Jalan Nginden 5 No.30', '1','08132265548978');
+INSERT INTO DOSEN VALUES('ES001','Endang Setyati, Dr., Ir., Hj.,, M.T.', 'P','ISLAM','SURABAYA',to_date('18/03/1998','dd/mm/yyyy'), 'Jalan Panglima Sudirman No.44', '0','081223225468');
+INSERT INTO DOSEN VALUES('EP001','Edwin Pramana, Ir., M.AppSc.', 'L','KATHOLIK','SURABAYA',to_date('13/02/2003','dd/mm/yyyy'), 'Jalan Rajawali No.115', '0', '082231655498');
+INSERT INTO DOSEN VALUES('EP002','Erick Pranata, S.Kom., M.Kom.', 'L','KRISTEN','SURABAYA',to_date('03/02/2004','dd/mm/yyyy'), 'Jalan Nyamplungan No.127', '0', '082231655497');
+INSERT INTO DOSEN VALUES('ES002','Eric Sugiharto, S.SI.', 'L','KRISTEN','SURABAYA',to_date('09/03/2009','dd/mm/yyyy'), 'Jalan Pahlawan No.70', '1','083326549785');
+INSERT INTO DOSEN VALUES('EI001','Esther Irawati Setiawan, S.Kom, M.Kom', 'P','BUDHA','MALANG',to_date('17/06/1973','dd/mm/yyyy'),'Jalan Nias No.111', '0', '083326544789');
+INSERT INTO DOSEN VALUES('FX001','F.X. Ferdinandus, Ir., M.T.', 'L','KATHOLIK','SURABAYA',to_date('13/11/1978','dd/mm/yyyy'), 'Jalan Nginden 1 No.184', '0','081132654498');
+INSERT INTO DOSEN VALUES('FH001','Francisca Haryanti Chandra, Dr., Ir., M.T.', 'P','KRISTEN','BANDUNG',to_date('03/02/1980','dd/mm/yyyy'), 'Jalan Raya Gubeng No.91', '0', '082232226548');
+INSERT INTO DOSEN VALUES('GL001','Grace Levina Dewi, S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',to_date('08/02/1981','dd/mm/yyyy'),'Jalan Raya Medokan Ayu. No.242', '1','082112114658');
+INSERT INTO DOSEN VALUES('GU001','Gunawan, Ir., M.Kom.', 'L','KATHOLIK','SURABAYA',to_date('13/03/1981','dd/mm/yyyy'), 'Jalan Pasar Turi No.7', '0', '082222655544');
+INSERT INTO DOSEN VALUES('HS001','Hari Sutiksno, Dr., Ir., M.T.', 'L','KRISTEN','SURABAYA',to_date('09/02/1983','dd/mm/yyyy'), 'Jalan Nyamplungan 240 No.253', '1', '081665988743');
+INSERT INTO DOSEN VALUES('HJ001','Hartarto Junaedi, S.Kom. ,M.Kom.', 'L','KRISTEN','SURABAYA',to_date('03/01/1986','dd/mm/yyyy'),'Jalan Raya Prapen No.236', '1','0813211234569');
+INSERT INTO DOSEN VALUES('HA001','Hendrawan Armanto, S.Kom., M.Kom.', 'L','KRISTEN','SURABAYA',to_date('18/03/1986','dd/mm/yyyy'), 'Jalan Nginden Intan Timur 1 No.72', '0', '081789885462');
+INSERT INTO DOSEN VALUES('HB001','Herman Budianto, Ir., M.M.', 'L','BUDHA','JAKARTA',to_date('27/04/1986','dd/mm/yyyy'), 'Jalan Raya Jemur Handayani 50 No.124', '0', '081665987523');
+INSERT INTO DOSEN VALUES('IC001','Iwan Chandra, S.Kom.', 'L','KRISTEN','JAKARTA',to_date('13/10/1986','dd/mm/yyyy'), 'Jalan Nginden Semolo No.59', '1', '081655987754');
+INSERT INTO DOSEN VALUES('IG001','Imelda Gozali, B.Eng., M.Pd.', 'P','KRISTEN','MALANG',to_date('04/04/1987','dd/mm/yyyy'), 'Jalan Raya Manyar No.171', '1','082211659984');
+INSERT INTO DOSEN VALUES('IL001','Indra Lesmana, S.Kom.', 'P','KATHOLIK','JAKARTA',to_date('24/12/1987','dd/mm/yyyy'), 'Jalan Raya Ngagel No.243', '0', '(081445877962');
+INSERT INTO DOSEN VALUES('IE001','Ivan Eliata Kusuma, S.T., M.T.', 'P','BUDHA','PORONG',to_date('01/08/1989','dd/mm/yyyy'),'Jalan Raya Rungkut Madya No.88', '0', '081332654841');
+INSERT INTO DOSEN VALUES('JC001','Jacky Cahyadi, S.Sn.', 'L','ISLAM','MADURA',to_date('25/09/1991','dd/mm/yyyy'), 'Jalan Raya Jemursari No.158', '0','081332224569');
+INSERT INTO DOSEN VALUES('JP001','Jaya Pranata, S.Kom., M.T.', 'L','HINDU','SURABAYA',to_date('03/06/1995','dd/mm/yyyy'),'Jalan Pasar Kembang 4-6 No.201', '1','08123256497');
+INSERT INTO DOSEN VALUES('JN001','Dr. Jenny Ngo, MSc.Ed.', 'P','KRISTEN','SURABAYA',to_date('28/12/1995','dd/mm/yyyy'), 'Jalan Rungkut Asri Barat IX No.224', '0','083655541211');
+INSERT INTO DOSEN VALUES('JS001','Joan Santoso, S.Kom., M.Kom.', 'L','KRISTEN','BALI',to_date('02/07/1970','dd/mm/yyyy'), 'Jalan Raya Kendangsari No.127', '1', '082236541121');
+INSERT INTO DOSEN VALUES('JH001','Jonie Hermanto, S.Kom.', 'L','HINDU','DENPASAR',to_date('02/04/1972','dd/mm/yyyy'),'Jalan Pucang Sewu VII No.139', '0','0813211565488');
+INSERT INTO DOSEN VALUES('JP002','Judi Prajetno Sugiono, Ir., M.M.', 'P','KRISTEN','BANJARMASIN',to_date('22/10/1973','dd/mm/yyyy'),'Jalan Ratna No.15', '1', '082233155489');
+INSERT INTO DOSEN VALUES('KE001','Kelvin, S.T., M.M.', 'L','KRISTEN','SURABAYA',to_date('10/12/1975','dd/mm/yyyy'),'Jalan Raya ITS, Surabaya No.125', '1','08145622315489');
+INSERT INTO DOSEN VALUES('KS001','Kevin Setiono, S.Kom.', 'L','KRISTEN','SURABAYA',to_date('24/08/1976','dd/mm/yyyy'),'Jalan Pemuda 33-35 No.118', '0','082232216598');
+INSERT INTO DOSEN VALUES('KG001','Khinardi Gunawan, Ir.', 'L','KATHOLIK','SURABAYA',to_date('09/12/1978','dd/mm/yyyy'), 'Jalan Raya Jambangan No.19', '0','086145221684');
+INSERT INTO DOSEN VALUES('KI001','Kristian Indradiarta G., S.Kom.', 'P','KRISTEN','SURABAYA',to_date('14/07/1981','dd/mm/yyyy'), 'jalan pajajaran No.200', '0','084451223203');
+INSERT INTO DOSEN VALUES('LZ001','Lukman Zaman P. C. S. W., S.Kom., M.Kom.', 'L','KRISTEN','PADANG',to_date('17/06/1982','dd/mm/yyyy'),'Jalan Penjernihan No.129', '0','08521665234');
+INSERT INTO DOSEN VALUES('IY001','Is Yuniarto Nafawi, S.Sn.', 'P','ISLAM','SURABAYA',to_date('04/07/1983','dd/mm/yyyy'), 'Jalan Ronggolawe No.13', '0','081654442133');
+INSERT INTO DOSEN VALUES('MB001','Martinus Brahma Dwi Laksana, S.T.', 'L','KATHOLIK','MADIUN',to_date('19/10/1983','dd/mm/yyyy'),'jalan raya jemur andayani No.4', '1', '082231664877');
+INSERT INTO DOSEN VALUES('IM001','Indra Maryati, S.Kom., M.Kom.', 'P','KRISTEN','SURABAYA',to_date('21/02/1984','dd/mm/yyyy'), 'Jalan Raya Jemursari No.247', '1', '08221133998');
+INSERT INTO DOSEN VALUES('MS001','Mikhael setiawan, S.Kom.', 'L','KRISTEN','SURABAYA',to_date('05/04/1987','dd/mm/yyyy'), 'Jalan Rangkah gg 7 no 26-B No.173', '0', '081132554477');
+INSERT INTO DOSEN VALUES('OB001','Oswald Baskoro Satyoadi, Ir., M.Kom.', 'L','BUDHA','MEDAN',to_date('08/12/1989','dd/mm/yyyy'),'Jalan Pengampon VI No.28', '0','082277998832');
+INSERT INTO DOSEN VALUES('CP001','C. Pickerling S.Kom.', 'P','KRISTEN','SURABAYA',to_date('16/01/1990','dd/mm/yyyy'), 'Jalan Rungkut Asri Tengah VIII No.24', '1', '083669578421');
+INSERT INTO DOSEN VALUES('PE001','Pram Eliyah Yuliana, S.T., M.T.', 'P','KRISTEN','MAKASSAR',to_date('20/06/1992','dd/mm/yyyy'), 'Jalan Pucang Anom Timur No.161', '0','081223156544');
+INSERT INTO DOSEN VALUES('SR001','Sri Rahayu, S.T., M.T.', 'P','ISLAM','MAGELANG',to_date('19/09/1973','dd/mm/yyyy'),'Jalan Raya Rungkut Madya Kav 8-10 No.227', '0', '081665454789');
+INSERT INTO DOSEN VALUES('RA001','Reddy Alexandro Harianto, S.Kom., M. Kom', 'L','KRISTEN','SURABAYA',to_date('17/10/1974','dd/mm/yyyy'),'Jalan Raya Ngagel No.158', '0', '082264533212');
+INSERT INTO DOSEN VALUES('RL001','Riandika Lumaris, S. Kom., M.Kom.', 'L','KATHOLIK','MEDAN',to_date('16/11/1974','dd/mm/yyyy'),'jalan ngagel jaya utara No.250', '0','086633278951');
+INSERT INTO DOSEN VALUES('SA001','Sandy Ardianto, S.Kom.', 'L','ISLAM','BANTEN',to_date('05/12/1976','dd/mm/yyyy'),'Jalan Pesapen Selatan No.251', '0','081133224569');
+INSERT INTO DOSEN VALUES('SA002','Setya Ardhi, S.T., M.Kom.', 'L','KATHOLIK','SURABAYA',to_date('17/07/1985','dd/mm/yyyy'), 'Jalan Pesapen Kali No.230', '1', '082298633524');
+INSERT INTO DOSEN VALUES('SU001','Sufiana, Dra., M.Sn.', 'P','KRISTEN','SURABAYA',to_date('11/01/1986','dd/mm/yyyy'),'Jalan Raya Jemur Sari No.82', '0', '082246497925');
+INSERT INTO DOSEN VALUES('ST001','S. Tigor B. Tambunan, S.T., M.M.', 'L','KRISTEN','MANADO',to_date('30/04/1987','dd/mm/yyyy'), 'Jalan Nginden Intan Barat No.199', '1','082231365688');
+INSERT INTO DOSEN VALUES('ST002','Suhatati Tjandra, Ir., M.Kom.', 'P','KATHOLIK','SURABAYA',to_date('30/06/1989','dd/mm/yyyy'),'Jalan Pasar Turi 1 No.221', '0','082246462232');
+INSERT INTO DOSEN VALUES('HT001','Herman Thuan To Saurik, S.Kom., M.T.', 'L','KATHOLIK','SURABAYA',to_date('26/11/1992','dd/mm/yyyy'), 'Jalan Raya Prapen No.202', '0','081144778985');
+INSERT INTO DOSEN VALUES('TP001','Tjwanda Putera Gunawan, Ir., M.Pd.', 'L','KATHOLIK','JAKARTA',to_date('18/06/1993','dd/mm/yyyy'), 'jalan pogot No.44', '1','089979552132');
+INSERT INTO DOSEN VALUES('MD001','Masrara Dwi Yanti Handayani, S.Pd.', 'P','KRISTEN','DEPOK',to_date('26/03/1996','dd/mm/yyyy'),'Jalan Panglima Sudirman No.210', '0', '084432125568');
+INSERT INTO DOSEN VALUES('YM001','Yuliana Melita Pranoto, S.Kom., M.Kom.', 'P','KRISTEN','AMBON',to_date('02/09/1972','dd/mm/yyyy'),'Jalan Raya Lontar No.237', '1', '089979855231');
+INSERT INTO DOSEN VALUES('YJ001','Yohanes Joko H., Drs., M.S.', 'L','KATHOLIK','SURABAYA',to_date('15/08/1974','dd/mm/yyyy'),'Jalan Raya Lontar No.66', '0','083346558792');
+INSERT INTO DOSEN VALUES('YK001','Yosi Kristian, S.Kom., M.Kom.', 'L','HINDU','DENPASAR',to_date('08/07/1975','dd/mm/yyyy'),'Jalan Nginden II No.88', '1', '085599693216');
+INSERT INTO DOSEN VALUES('YW001','Yulius Widi Nugroho, S.Sn. ,M.Si.', 'P','KRISTEN','SURABAYA',to_date('17/12/1978','dd/mm/yyyy'), 'Jalan Nginden 2 No.99', '0','086631465198');
 
-	INSERT INTO MAHASISWA VALUES('217011670','EI001','01','Daud Kurnia Tanamas','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217011671','EI001','01','Dimas Bagus Nugroho Verdy Anwar','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217011672','EI001','01','Hafizh Ainanto Pratama','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217011673','EI001','01','Laurentius Dirga Cahya Putra','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217011674','EI001','01','Reyhan Rahma Sugiarto','kristen','surabaya',sysdate,'P','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217011675','EI001','01','Rifqy Alfiansyah','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217102588','HS001','10','Andreas Wijaya','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217102589','HS001','10','Christine Calista','kristen','surabaya',sysdate'P','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217102590','HS001','10','Dafi Gumawang Priadi','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217102591','HS001','10','Jeffry Sandy Purnomo','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217102592','SA002','10','Rio Ardandi','kristen','surabaya',sysdate,'L','L','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217102593','SA002','10','Rohman Is Wahyudi','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217102594','SA002','10','Teguh Santoso','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
-	INSERT INTO MAHASISWA VALUES('217102595','SA002','10','Tonny Salim Suswanto','kristen','surabaya',sysdate,'L','surabaya','081-123','ferguso','081-321');
+	INSERT INTO MAHASISWA VALUES('217011670','AG001','01','Daud Kurnia Tanamas','ISLAM','SURABAYA',to_date('14/02/1999','dd/mm/yyyy'),'L','Jalan ngaglik no.21','082232347447','Budianto Tanamas','082232345685');
+	INSERT INTO MAHASISWA VALUES('217011671','AD002','01','Dimas Bagus Nugroho Verdy Anwar','ISLAM','BANDUNG',to_date('16/02/1999','dd/mm/yyyy'),'L','Jalan Madu no. 32','081654445288','Bambang Ade Tan','081321115462');
+	INSERT INTO MAHASISWA VALUES('217011672','DA001','01','Hafizh Ainanto Pratama','KRISTEN','SURABAYA',to_date('04/04/1999','dd/mm/yyyy'),'L','Jalan Mangga no.353','082215664832','Bambang Iskandar Sudirman','082655489723');
+	INSERT INTO MAHASISWA VALUES('217011673','AA001','01','Laurentius Dirga Cahya Putra','KATHOLIK','MAGELANG',to_date('14/04/1999','dd/mm/yyyy'),'L','Jalan Manggis no.09','081987772563','Ciawi Enlai','08826452213');
+	INSERT INTO MAHASISWA VALUES('217011674','DD001','01','Reyhan Rahma Sugiarto','KATHOLIK','SURABAYA',to_date('21/05/1999','dd/mm/yyyy'),'P','Jalan Panderman no.56','084526669872','Liecharlie Bingwen','083362552134');
+	INSERT INTO MAHASISWA VALUES('217011675','ER001','01','Rifqy Alfiansyah','ISLAM','SURABAYA',to_date('25/05/1999','dd/mm/yyyy'),'L','Jalan ngagel jaya selatan no.89','085698745216','Mujahid Buchori','087988254623');
+	INSERT INTO MAHASISWA VALUES('217102588','ES002','10','Andreas Wijaya','KRISTEN','PANDAAN',to_date('15/06/1999','dd/mm/yyyy'),'L','Jalan Sulawesi no. 45-47','086369852213','Zebulun Napitupulu','084622650310');
+	INSERT INTO MAHASISWA VALUES('217102589','GL001','10','Christine Calista','KRISTEN','SURABAYA',to_date('07/08/1999','dd/mm/yyyy')'P','Jalan Kalijudan no.11','0879885232110','John Hutaurat','086632139885');
+	INSERT INTO MAHASISWA VALUES('217102590','HS001','10','Dafi Gumawang Priadi','KRISTEN','PADANG',to_date('13/08/1999','dd/mm/yyyy'),'L','Jalan Pahlawan no. 13','087966523152','Ethan Sihotang','089963662001');
+	INSERT INTO MAHASISWA VALUES('217102591','HJ001','10','Jeffry Sandy Purnomo','KATHOLIK','SURABAYA',to_date('26/08/1999','dd/mm/yyyy'),'L','Jalan Kalikepiting no. 111','082231564420','Budi','086632120046');
+	INSERT INTO MAHASISWA VALUES('217102592','IC001','10','Rio Ardandi','BUDHA','SURABAYA',to_date('21/10/1999','dd/mm/yyyy'),'L','Jalan Padang-Padang no.33','082232134693','Iman Sudirman Kartawijaya','082231316522');
+	INSERT INTO MAHASISWA VALUES('217102593','IG001','10','Rohman Is Wahyudi','ISLAM','ACEH',to_date('10/11/1999','dd/mm/yyyy'),'L','Jalan Mulyosari no. 12','081020332564','Dian Kusuma Sutedja','083310105607');
+	INSERT INTO MAHASISWA VALUES('217102594','JP001','10','Teguh Santoso','KATHOLIK','SURABAYA',to_date('13/11/1999','dd/mm/yyyy'),'L','Jalan Sutorejo no. 23','081651220031','Tanutama Guangli','082210312505');
+	INSERT INTO MAHASISWA VALUES('217102595','JS001','10','Tonny Salim Suswanto','HINDU','DENPASAR',to_date('23/12/1999','dd/mm/yyyy'),'L','Jalan Manokwari no.69','085422310155','Lika Minsheng','082231663520');
 
 INSERT INTO JURUSAN VALUES('11','S1-Teknik Informatika','YK001');
 INSERT INTO JURUSAN VALUES('17','S1-Desain Komunikasi Visual','LZ001');
