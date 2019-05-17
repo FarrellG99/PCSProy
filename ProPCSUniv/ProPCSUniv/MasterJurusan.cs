@@ -27,12 +27,11 @@ namespace ProPCSUniv
             DG.Columns[1].HeaderText = "JURUSAN";
             DG.Columns[2].HeaderText = "NIP";
             DG.Columns[3].HeaderText = "DOSEN";
-            DG.Columns[4].HeaderText = "STATUS";
         }
         private void buka_grid()
         {
             DT = new DataTable();
-            ADAP = new OracleDataAdapter("select jurusan.kode_jurusan,nama_jurusan,jurusan.nip,nama_dosen,statusjurusan "+
+            ADAP = new OracleDataAdapter("select jurusan.kode_jurusan,nama_jurusan,jurusan.nip,nama_dosen"+
                 " from jurusan,dosen where jurusan.nip=dosen.nip " + searchtxt, conn);
             ADAP.Fill(DT);
             DG.DataSource = DT;
@@ -96,8 +95,8 @@ namespace ProPCSUniv
                 {
                     OracleCommand oupd = new OracleCommand("update jurusan set " +
                      "nip='" + DTKAJUR.Rows[cmbKepalaJur.SelectedIndex].ItemArray[0].ToString() + "'," +
-                     "nama_jurusan='" + txtNamaJur.Text + "'," +
-                     "statusjurusan='" + status + "' where " +
+                     "nama_jurusan='" + txtNamaJur.Text + "'" +
+                     " where " +
                      "kode_jurusan='" + txtKodeJur.Text + "'"
                      , conn);
                     if (conn.State == ConnectionState.Closed) conn.Open();
@@ -156,9 +155,6 @@ namespace ProPCSUniv
             txtKodeJur.Text = DT.Rows[e.RowIndex].ItemArray[0].ToString();
             txtNamaJur.Text = DT.Rows[e.RowIndex].ItemArray[1].ToString();
             cmbKepalaJur.SelectedIndex = cari_idx_kajur(DT.Rows[e.RowIndex].ItemArray[2].ToString());
-            if (DT.Rows[e.RowIndex].ItemArray[4].ToString() == "Y")
-                rbAktif.Checked = true;
-            else rbTidakAktif.Checked = true;
             siapkan_form_mode(false);
         }
 
@@ -176,8 +172,8 @@ namespace ProPCSUniv
                     OracleCommand oins = new OracleCommand("insert into jurusan values(" +
                   "'" + txtKodeJur.Text + "'," +
                   "'" + DTKAJUR.Rows[cmbKepalaJur.SelectedIndex].ItemArray[0].ToString() + "'," +
-                  "'" + txtNamaJur.Text + "'," +
-                  "'" + status + "')"
+                  "'" + txtNamaJur.Text + "'" +
+                  ")"
                   , conn);
                     oins.ExecuteNonQuery();
                     MessageBox.Show("1 data jurusan terbuat");

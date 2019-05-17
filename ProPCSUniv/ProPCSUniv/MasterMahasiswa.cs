@@ -38,8 +38,6 @@ namespace ProPCSUniv
                 string notelp = DG.Rows[e.RowIndex].Cells[9].Value.ToString();
                 string namaortu = DG.Rows[e.RowIndex].Cells[10].Value.ToString();
                 string notelportu = DG.Rows[e.RowIndex].Cells[11].Value.ToString();
-                string lastwali = DG.Rows[e.RowIndex].Cells[12].Value.ToString();
-                double ips = Convert.ToDouble(DG.Rows[e.RowIndex].Cells[13].Value.ToString());
 
                 txtnrp.Text = nrp;
                 txtnama.Text = nama;
@@ -60,7 +58,6 @@ namespace ProPCSUniv
                 comboBox1.Text = jurusan;
                 comboBox2.Text = dosenwali;
                 comboBox3.Text = agama;
-                label17.Text = ips.ToString();
             }
         }
 
@@ -70,14 +67,15 @@ namespace ProPCSUniv
             {
                 string carii = txtSearch.Text;
                 DT = new DataTable();
-                ADAP = new OracleDataAdapter(" select m.nrp ,d.namadosen ,j.namajurusan " +
-                    ",m.namamhs ,case m.jkmhs when 'M' then 'Laki-Laki' when 'F' then " +
-                    "'Perempuan' end ,m.agamamhs ,m.tempatlahirmhs ,m.tgllahirmhs ," +
-                    "m.alamatmhs ,m.notelpmhs ,m.namaortumhs ,m.notelportumhs, " +
-                    "nvl(to_char(m.last_wali),'Belum Perwalian'),m.ips from mahasiswa m , " +
-                    "dosen d , jurusan j where m.kodejurusan = j.kodejurusan and m.nip = " +
-                    "d.nip and m.nrp like '%"+carii+ "%' or d.namadosen like '%" + carii + "%' or m.namamhs like '%"+ carii +"%' " +
-                    "or j.namajurusan like '%"+ carii +"%' or order by 1", conn);
+                ADAP = new OracleDataAdapter(" select m.nrp ,d.nama_dosen ,j.nama_jurusan," +
+                    "m.nama_mahasiswa ,case m.jenis_kelamin when 'L' " +
+                    "then 'Laki-Laki' when 'P' then 'Perempuan' end " +
+                    ",m.agama_mahasiswa ,m.tempatlahir_mhs ,m.tgllahir_mhs " +
+                    ",m.alamat_mhs ,m.notelp_mhs ,m.namaortu_mhs ,m.notelportu_mhs from mahasiswa m " +
+                    ",dosen d , jurusan j where  m.nip = d.nip and j.kode_jurusan = m.kode_jurusan and " +
+                    "(m.nrp like '%"+carii+ "%' " +
+                    "or d.namadosen like '%" + carii + "%' or m.namamhs like '%"+ carii +"%' " +
+                    "or j.namajurusan like '%"+ carii +"%') order by 1", conn);
                 ADAP.Fill(DT);
                 DG.DataSource = DT;
                 rename_header();
@@ -144,24 +142,23 @@ namespace ProPCSUniv
                 string jk;
                 if (rbFemale.Checked == true)
                 {
-                    jk = "F";
+                    jk = "P";
                 }
                 else
                 {
-                    jk = "M";
+                    jk = "L";
                 }
                 string qry = "insert into mahasiswa values " +
                         "('" + txtnrp.Text + "','" + comboBox2.SelectedValue.ToString() + "','" + comboBox1.SelectedValue.ToString() + "'" +
-                        ",'" + txtnama.Text + "','" + jk + "','" + comboBox3.Text.ToString() + "','" + txttmptlhr.Text + "'" +
+                        ",'" + txtnama.Text + "','" + comboBox3.Text.ToString() + "','" + txttmptlhr.Text + "'"+
                         ",to_date('" + dateTimePicker1.Value.Day.ToString().PadLeft(2, '0') + "/" + dateTimePicker1.Value.Month.ToString().PadLeft(2, '0') + "/" + dateTimePicker1.Value.Year.ToString().PadLeft(4, '0') + "','dd/mm/yyyy')" +
-                        ",'" + txtalamat.Text + "','" + txtnotelp.Text + "','" + txtnamaortu.Text + "'" +
-                        ",'" + txttelportu.Text + "'," +
-                        "to_date('','dd/mm/yyyy'),0.00)";
+                        ",'"+jk+"','" + txtalamat.Text + "','" + txtnotelp.Text + "','" + txtnamaortu.Text + "'" +
+                        ",'" + txttelportu.Text + "')";
                 try
                 {
                     OracleCommand ocap = new OracleCommand(qry, conn);
                     ocap.ExecuteNonQuery();
-                    String qryins = "insert into pengguna values('" + txtnrp.Text + "','" + txtnrp.Text + "')";
+                    String qryins = "insert into pengguna values('" + txtnrp.Text + "','123')";
                     OracleCommand ocappgn = new OracleCommand(qryins, conn);
                     ocappgn.ExecuteNonQuery();
                     MessageBox.Show("user pengguna masuk ");
@@ -186,17 +183,17 @@ namespace ProPCSUniv
                 string jk;
                 if (rbFemale.Checked == true)
                 {
-                    jk = "F";
+                    jk = "P";
                 }
                 else
                 {
-                    jk = "M";
+                    jk = "L";
                 }
-                string qry = "update mahasiswa set nip = '" + comboBox2.SelectedValue.ToString() + "', kodejurusan='" + comboBox1.SelectedValue.ToString() + "'" +
-                        ", namamhs='" + txtnama.Text + "', jkmhs='" + jk + "', agamamhs='" + comboBox3.Text.ToString() + "', tempatlahirmhs='" + txttmptlhr.Text + "'" +
-                        ",tgllahirmhs= to_date('" + dateTimePicker1.Value.Day.ToString().PadLeft(2, '0') + "/" + dateTimePicker1.Value.Month.ToString().PadLeft(2, '0') + "/" + dateTimePicker1.Value.Year.ToString().PadLeft(4, '0') + "','dd/mm/yyyy')" +
-                        ", alamatmhs = '" + txtalamat.Text + "', notelpmhs = '" + txtnotelp.Text + "', namaortumhs ='" + txtnamaortu.Text + "'" +
-                        ", notelportumhs = '" + txttelportu.Text + "' where nrp = '"+txtnrp.Text+"'";
+                string qry = "update mahasiswa set nip = '" + comboBox2.SelectedValue.ToString() + "', kode_jurusan = '" + comboBox1.SelectedValue.ToString() + "'" +
+                        ",nama_mahasiswa = '" + txtnama.Text + "', agama_mahasiswa = '" + comboBox3.Text.ToString() + "', tempatlahir_mhs = '" + txttmptlhr.Text + "'" +
+                        ",tgllahir_mhs = to_date('" + dateTimePicker1.Value.Day.ToString().PadLeft(2, '0') + "/" + dateTimePicker1.Value.Month.ToString().PadLeft(2, '0') + "/" + dateTimePicker1.Value.Year.ToString().PadLeft(4, '0') + "','dd/mm/yyyy')" +
+                        ", jenis_kelamin = '" + jk + "',alamat_mhs = '" + txtalamat.Text + "',notelp_mhs = '" + txtnotelp.Text + "', nama_ortu = '" + txtnamaortu.Text + "'" +
+                        ",notelportu_mhs = '" + txttelportu.Text + "' where nrp = '"+ txtnrp.Text +"'";
                 try
                 {
                     OracleCommand ocap = new OracleCommand(qry, conn);
@@ -256,23 +253,21 @@ namespace ProPCSUniv
         {
             DG.Columns[0].HeaderText = "NRP";
             DG.Columns[1].HeaderText = "Dosen Wali";
-            DG.Columns[2].HeaderText = "Jurusan";
+            DG.Columns[2].HeaderText = "Nama Jurusan";
             DG.Columns[3].HeaderText = "Nama Mahasiswa";
             DG.Columns[4].HeaderText = "Jenis Kelamin";
             DG.Columns[5].HeaderText = "Agama";
             DG.Columns[6].HeaderText = "Tempat Lahir";
             DG.Columns[7].HeaderText = "Tanggal Lahir";
-            DG.Columns[8].HeaderText = "Alamat mahasiswa";
+            DG.Columns[8].HeaderText = "Alamat Mahasiswa";
             DG.Columns[9].HeaderText = "No.Telpon Mahasiswa";
             DG.Columns[10].HeaderText = "Nama Orang Tua";
             DG.Columns[11].HeaderText = "No.Telpon Orang Tua";
-            DG.Columns[12].HeaderText = "Perwalian Terakhir";
-            DG.Columns[13].HeaderText = "IPS";
         }
         private void buka_grid()
         {
             DT = new DataTable();         
-            ADAP = new OracleDataAdapter(" select m.nrp ,d.namadosen ,j.namajurusan ,m.namamhs ,case m.jkmhs when 'M' then 'Laki-Laki' when 'F' then 'Perempuan' end ,m.agamamhs ,m.tempatlahirmhs ,m.tgllahirmhs ,m.alamatmhs ,m.notelpmhs ,m.namaortumhs ,m.notelportumhs, nvl(to_char(m.last_wali),'Belum Perwalian'),m.ips from mahasiswa m , dosen d , jurusan j where m.kodejurusan = j.kodejurusan and m.nip = d.nip order by 1", conn);
+            ADAP = new OracleDataAdapter(" select m.nrp ,d.nama_dosen ,j.nama_jurusan,m.nama_mahasiswa ,case m.jenis_kelamin when 'L' then 'Laki-Laki' when 'P' then 'Perempuan' end ,m.agama_mahasiswa ,m.tempatlahir_mhs ,m.tgllahir_mhs ,m.alamat_mhs ,m.notelp_mhs ,m.namaortu_mhs ,m.notelportu_mhs from mahasiswa m , dosen d , jurusan j where  m.nip = d.nip and j.kode_jurusan = m.kode_jurusan order by 1", conn);
             ADAP.Fill(DT);
             DG.DataSource = DT;
             rename_header();
@@ -283,16 +278,16 @@ namespace ProPCSUniv
             ADAP = new OracleDataAdapter("select * from jurusan", conn);
             ADAP.Fill(DTJURUSAN);
             comboBox1.Items.Clear();
-            comboBox1.ValueMember = "kodejurusan" ;
-            comboBox1.DisplayMember = "namajurusan" ;
+            comboBox1.ValueMember = "kode_jurusan" ;
+            comboBox1.DisplayMember = "nama_jurusan" ;
             comboBox1.DataSource = DTJURUSAN;
 
             DTDOSENWALI = new DataTable();
-            ADAP = new OracleDataAdapter("select * from dosen where statuswali = 'Y'", conn);
+            ADAP = new OracleDataAdapter("select * from dosen where status_wali = 'Y'", conn);
             ADAP.Fill(DTDOSENWALI);
             comboBox2.Items.Clear();
             comboBox2.ValueMember = "nip";
-            comboBox2.DisplayMember = "namadosen";
+            comboBox2.DisplayMember = "nama_dosen";
             comboBox2.DataSource = DTDOSENWALI;
 
 

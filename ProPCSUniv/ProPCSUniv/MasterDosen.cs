@@ -39,16 +39,16 @@ namespace ProPCSUniv
             DG.Columns[2].HeaderText = "Jenis Kelamin";
             DG.Columns[3].HeaderText = "Agama";
             DG.Columns[4].HeaderText = "Alamat Dosen";
-            DG.Columns[5].HeaderText = "No.Telpon Dosen";
-            DG.Columns[6].HeaderText = "Status Wali";
+            DG.Columns[5].HeaderText = "Status Wali";
+            DG.Columns[6].HeaderText = "No. Telpon Dosen";
         }
         private void buka_grid()
         {
             DT = new DataTable();
-            ADAP = new OracleDataAdapter("select nip,namadosen,case jkdosen when 'M' then " +
-                "'Laki-Laki' when 'F' then 'Perempuan' end,agamadosen,alamatdosen," +
-                "notelpdosen,case statuswali when 'N' then 'Bukan Dosen Wali'" +
-                " when 'Y' then 'Dosen Wali' end from dosen order by 1", conn);
+            ADAP = new OracleDataAdapter("select nip,nama_dosen,case jkdosen when 'L' then " +
+                "'Laki-Laki' when 'P' then 'Perempuan' end,agama_dosen,tempatlhr_dosen,tanggal_dosen,alamat_dosen," +
+                "case status_wali when '0' then 'Bukan Dosen Wali'" +
+                " when '1' then 'Dosen Wali' end, notelp_dosen from dosen order by 1", conn);
             ADAP.Fill(DT);
             DG.DataSource = DT;
             rename_header();
@@ -63,9 +63,11 @@ namespace ProPCSUniv
                 string nama = DG.Rows[e.RowIndex].Cells[1].Value.ToString();
                 string jk = DG.Rows[e.RowIndex].Cells[2].Value.ToString();
                 string agama = DG.Rows[e.RowIndex].Cells[3].Value.ToString();
-                string alamat = DG.Rows[e.RowIndex].Cells[4].Value.ToString();
-                string notelp = DG.Rows[e.RowIndex].Cells[5].Value.ToString();
-                string stat = DG.Rows[e.RowIndex].Cells[6].Value.ToString();
+                string tmptlhr = DG.Rows[e.RowIndex].Cells[4].Value.ToString();
+                DateTime tgllhr = Convert.ToDateTime(DG.Rows[e.RowIndex].Cells[5].Value.ToString());
+                string alamat = DG.Rows[e.RowIndex].Cells[6].Value.ToString();
+                string stat = DG.Rows[e.RowIndex].Cells[7].Value.ToString();
+                string notelp = DG.Rows[e.RowIndex].Cells[8].Value.ToString();
 
                 txtNip.Text = nip;
                 txtNamadosen.Text = nama;
@@ -77,6 +79,8 @@ namespace ProPCSUniv
                 {
                     rbFemale.Checked = true;
                 }
+                dateTimePicker1.Value = tgllhr;
+                txtTmptlhr.Text = tmptlhr;
                 comboBox1.Text = agama;
                 txtAlamat.Text = alamat;
                 TxtNotelp.Text = notelp;
@@ -130,29 +134,32 @@ namespace ProPCSUniv
                 string jk;
                 if (rbFemale.Checked == true)
                 {
-                    jk = "F";
+                    jk = "P";
                 }
                 else
                 {
-                    jk = "M";
+                    jk = "L";
                 }
                 string stats;
                 if (radioButton1.Checked == true)
                 {
-                    stats = "Y";
+                    stats = "1";
                 }
                 else
                 {
-                    stats = "N";
+                    stats = "0";
                 }
                 string qry = "insert into dosen values('"+txtNip.Text+"','"+txtNamadosen.Text+"'," +
-                    "'"+jk+"','"+comboBox1.Text+"','"+txtAlamat.Text+"','"+TxtNotelp.Text+"','"+stats+"')";
+                    "'"+jk+"','"+comboBox1.Text+"','"+txtTmptlhr.Text+ "',to_date('" + dateTimePicker1.Value.Day.ToString().PadLeft(2, '0') + "" +
+                    "/" + dateTimePicker1.Value.Month.ToString().PadLeft(2, '0') + "" +
+                    "/" + dateTimePicker1.Value.Year.ToString().PadLeft(4, '0') + "','dd/mm/yyyy'),'" +
+                    "" + txtAlamat.Text+"','"+stats+"','"+TxtNotelp.Text+"')";
                 try
                 {
                     OracleCommand ocap = new OracleCommand(qry, conn);
                     ocap.ExecuteNonQuery();
                     MessageBox.Show("1 Data Dosen telah Masuk ");
-                    String qryins = "insert into pengguna values('" + txtNip.Text + "','" + txtNip.Text + "')";
+                    String qryins = "insert into pengguna values('" + txtNip.Text + "','123')";
                     OracleCommand ocappgn = new OracleCommand(qryins, conn);
                     ocappgn.ExecuteNonQuery();
                     MessageBox.Show("user pengguna masuk ");
@@ -190,24 +197,26 @@ namespace ProPCSUniv
                 string jk;
                 if (rbFemale.Checked == true)
                 {
-                    jk = "F";
+                    jk = "P";
                 }
                 else
                 {
-                    jk = "M";
+                    jk = "L";
                 }
                 string stats;
                 if (radioButton1.Checked == true)
                 {
-                    stats = "Y";
+                    stats = "1";
                 }
                 else
                 {
-                    stats = "N";
+                    stats = "0";
                 }
-                string qry = "update dosen set namadosen = '" + txtNamadosen.Text + "'," +
-                    "jkdosen = '" + jk + "',agamadosen = '" + comboBox1.Text + "',alamatdosen = '" + txtAlamat.Text + "'" +
-                    ",notelpdosen = '" + TxtNotelp.Text + "',statuswali = '" + stats + "' where nip = '"+txtNip.Text+"'";
+                string qry = "update dosen set nama_dosen = '" + txtNamadosen.Text + "'," +
+                    "jkdosen = '" + jk + "',agama_dosen = '" + comboBox1.Text + "',tempatlhr_dosen = '" + txtTmptlhr.Text + "', tanggal_dosen = to_date('" + dateTimePicker1.Value.Day.ToString().PadLeft(2, '0') + "" +
+                    "/" + dateTimePicker1.Value.Month.ToString().PadLeft(2, '0') + "" +
+                    "/" + dateTimePicker1.Value.Year.ToString().PadLeft(4, '0') + "','dd/mm/yyyy'), alamat_dosen = '" +
+                    "" + txtAlamat.Text + "', status_wali = '" + stats + "', notelp_dosen  = '" + TxtNotelp.Text + "' where nip = '"+txtNip.Text+"'";
                 try
                 {
                     OracleCommand ocap = new OracleCommand(qry, conn);

@@ -242,6 +242,7 @@
             this.label17.Size = new System.Drawing.Size(25, 13);
             this.label17.TabIndex = 36;
             this.label17.Text = "0.0";
+            this.label17.Visible = false;
             // 
             // label16
             // 
@@ -252,6 +253,7 @@
             this.label16.Size = new System.Drawing.Size(27, 13);
             this.label16.TabIndex = 35;
             this.label16.Text = "IPS";
+            this.label16.Visible = false;
             // 
             // dateTimePicker2
             // 
@@ -260,8 +262,9 @@
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker2.Location = new System.Drawing.Point(500, 76);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(227, 20);
+            this.dateTimePicker2.Size = new System.Drawing.Size(158, 20);
             this.dateTimePicker2.TabIndex = 34;
+            this.dateTimePicker2.Visible = false;
             // 
             // label15
             // 
@@ -272,6 +275,7 @@
             this.label15.Size = new System.Drawing.Size(117, 13);
             this.label15.TabIndex = 33;
             this.label15.Text = "Tgl Akhir Perwalian";
+            this.label15.Visible = false;
             // 
             // comboBox2
             // 

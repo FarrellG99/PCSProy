@@ -17,3 +17,22 @@ C:\Users\rabbit\Desktop\Proyek pcs farrel delvin\ProPCSUniv\ProPCSUniv\obj\Debug
 C:\Users\rabbit\Desktop\Proyek pcs farrel delvin\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.MasterMahasiswa.resources
 C:\Users\rabbit\Desktop\Proyek pcs farrel delvin\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.MasterRuangan.resources
 C:\Users\rabbit\Desktop\Proyek pcs farrel delvin\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.MasterPeriode.resources
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\bin\Debug\ProPCSUniv.exe.config
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\bin\Debug\ProPCSUniv.exe
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\bin\Debug\ProPCSUniv.pdb
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\bin\Debug\Oracle.DataAccess.dll
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.csprojResolveAssemblyReference.cache
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.FMenuAdmin.resources
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.FMenuDosen.resources
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.FMenuMhs.resources
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.Form1.resources
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.MasterDosen.resources
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.MasterJurusan.resources
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.MasterMahasiswa.resources
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.MasterRuangan.resources
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.MasterPeriode.resources
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.Properties.Resources.resources
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.csproj.GenerateResource.Cache
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.csproj.CoreCompileInputs.cache
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.exe
+C:\Users\Delvin\Documents\GitHub\PCSProy\ProPCSUniv\ProPCSUniv\obj\Debug\ProPCSUniv.pdb
