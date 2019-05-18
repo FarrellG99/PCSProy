@@ -13,7 +13,8 @@ namespace ProPCSUniv
 {
     public partial class Form1 : Form
     {
-        public static OracleConnection conn = new OracleConnection("user id=pcs;password=pcs;data source=orcl");
+        public static OracleConnection conn = new OracleConnection("user id=pcsuniv;password=1234;data source=orcl");
+        public static String usernamelogin;
         public Form1()
         {
             InitializeComponent();
@@ -52,16 +53,19 @@ namespace ProPCSUniv
                 {
                     if (dt.Rows[0].ItemArray[2].ToString() == "admin")
                     {
+                        usernamelogin = textBox1.Text;
                         FMenuAdmin fadmin = new FMenuAdmin();
                         fadmin.Show();
                     }
                     else if (dt.Rows[0].ItemArray[2].ToString() == "DOSEN")
                     {
+                        usernamelogin = textBox1.Text;
                         FMenuDosen fdosen = new FMenuDosen();
                         fdosen.Show();
                     }
-                    else if (dt.Rows[0].ItemArray[2].ToString() == "MAHASISWA")
+                    else if (dt.Rows[0].ItemArray[2].ToString() == "MHS")
                     {
+                        usernamelogin = textBox1.Text;
                         FMenuMhs fmhs = new FMenuMhs();
                         fmhs.Show();
                     }

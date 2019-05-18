@@ -35,28 +35,32 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fRSToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(284, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(834, 28);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fRSToolStripMenuItem
             // 
             this.fRSToolStripMenuItem.Name = "fRSToolStripMenuItem";
-            this.fRSToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            this.fRSToolStripMenuItem.Size = new System.Drawing.Size(45, 24);
             this.fRSToolStripMenuItem.Text = "FRS";
+            this.fRSToolStripMenuItem.Click += new System.EventHandler(this.fRSToolStripMenuItem_Click);
             // 
             // FMenuMhs
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(834, 591);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FMenuMhs";
             this.Text = "Menu Mahasiswa";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

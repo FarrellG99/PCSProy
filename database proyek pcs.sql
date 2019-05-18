@@ -408,3 +408,32 @@ end;
 /
 show err;
 execute p1;
+
+create or replace function autogenfrs1
+(inputnrp in varchar2)
+return varchar2
+is
+	depan varchar2(1);
+	jurusan varchar2(3);
+	gabung varchar2(4);
+	nrp number(4);
+	hasil varchar2(8);
+begin
+	if substr(inputnrp,4,2) = 01 then
+		depan := 'F';
+		jurusan := 'INF';
+		gabung := depan || jurusan;
+		nrp := substr(inputnrp,6,4);
+		hasil := gabung || nrp;
+	end if;
+	
+	return hasil;
+end;
+/
+show err;
+
+
+
+select substr(NRP,6,4) from PERWALIAN;
+
+select autogenfrs1('217011670') from dual;
